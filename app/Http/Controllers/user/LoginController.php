@@ -10,4 +10,8 @@ class LoginController extends Controller
     public function show(){
         return view('user.login');
     }
+
+    public function create(){
+
+    }
 }

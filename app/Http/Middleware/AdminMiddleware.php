@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class Admin
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,6 +15,9 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (auth()->check() && auth()->user()->is_admin) {
+            return $next($request);
+        }
+        return redirect('/');
     }
 }

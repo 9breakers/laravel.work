@@ -32,7 +32,7 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
         if ($user) {
             return back()->withErrors([
-                'password' => 'Неправильний пароль'
+                'password' => 'Неправельний пароль'
             ]);
         } else {
             return back()->withErrors([

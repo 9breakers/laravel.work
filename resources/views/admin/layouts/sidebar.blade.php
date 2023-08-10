@@ -28,8 +28,8 @@
                 </a>
                 <div class="collapse" id="collapseCategories" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="category-1.html">Всі категорії</a>
-                        <a class="nav-link" href="category-1.html">Додати категорію</a>
+                        <a class="nav-link" href="{{route('category.index')}}">Всі категорії</a>
+                        <a class="nav-link" href="{{route('category.create')}}">Додати категорію</a>
 
                     </nav>
                 </div>

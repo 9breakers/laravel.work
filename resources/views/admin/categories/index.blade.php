@@ -5,13 +5,13 @@
         <div class="row">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">Всі теги</h2>
+                    <h2 class="card-title">Всі категорії</h2>
                 </div>
 
                 <div class="card-body">
-                    <a href="{{ route('tags.create') }}" class="btn btn-primary mb-3">Додати тег</a>
+                    <a href="{{route('category.create')}}" class="btn btn-primary mb-3">Додати категорію</a>
 
-                    @if (count($tags))
+                    @if (count($category))
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover text-nowrap">
                                 <thead>
@@ -23,18 +23,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($tags as $tag)
+                                @foreach($category as $cat)
                                     <tr>
-                                        <td>{{ $tag->id }}</td>
-                                        <td>{{ $tag->name }}</td>
-                                        <td>{{ $tag->slug }}</td>
+                                        <td>{{ $cat->id }}</td>
+                                        <td>{{ $cat->name }}</td>
+                                        <td>{{ $cat->slug }}</td>
                                         <td>
 
 
-                                            <a href="{{ route('tags.edit', ['tag' => $tag->slug]) }}" class="btn btn-info btn-sm float-left mr-1">
+                                            <a href="{{ route('category.edit', ['category' => $cat->slug]) }}" class="btn btn-info btn-sm float-left mr-1">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form action="{{ route('tags.destroy', ['tag' => $tag->slug]) }}" method="post" class="float-left">
+                                            <form action="{{ route('category.destroy', ['category' => $cat->slug]) }}" method="post" class="float-left">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Підтвердити видалення')">
@@ -47,13 +47,13 @@
                                 </tbody>
                             </table>
                         </div>
-
                     @else
                         <p>Категорій поки нема</p>
                     @endif
                 </div>
             </div>
         </div>
+
     </div>
 
 

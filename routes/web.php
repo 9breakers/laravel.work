@@ -8,6 +8,7 @@ use App\Http\Controllers\user\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\admin\TagController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +25,7 @@ Route::middleware(['admin'])->group(function (){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::resource('/tags', TagController::class);
     Route::resource('/category', CategoryController::class);
+    Route::resource('/post', PostController::class);
 });
 
 Route::middleware(['guest'])->group(function (){

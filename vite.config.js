@@ -10,6 +10,11 @@ export default defineConfig({
                 'resources/admin/js/chart-bar-demo.js',
                 'resources/admin/js/datatables-simple-demo.js',
                 'resources/admin/js/scripts.js',
+
+                'resources/main/css/styles.css',
+                'resources/main/js/scripts.js'
+
+
             ],
             refresh: true,
         }),

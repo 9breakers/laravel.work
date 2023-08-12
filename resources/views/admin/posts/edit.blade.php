@@ -44,6 +44,15 @@
             </span>
             @enderror
         </div>
+        <div class="form-group">
+            <label for="quantity">Перегляди</label>
+            <input type="number" class="form-control  @error('views') is-invalid @enderror" id="views" name="views" min="0" value="{{ $post->views }}">
+            @error('views')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
 
         <div class="form-group">
             <label for="tags">Теги</label>

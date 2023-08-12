@@ -43,6 +43,15 @@
             @enderror
         </div>
         <div class="form-group">
+            <label for="quantity">Перегляди</label>
+            <input type="number" class="form-control  @error('views') is-invalid @enderror " id="views" name="views" min="0" >
+            @error('views')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        <div class="form-group">
             <label for="tags">Теги</label>
             <select class="form-control tags-select  @error('tags') is-invalid @enderror" id="tags" name="tags[]" multiple>
                 @foreach($tags as $k => $v)

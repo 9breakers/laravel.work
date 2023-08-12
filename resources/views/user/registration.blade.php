@@ -27,7 +27,7 @@
                                     @csrf
                                     <div class="form-floating mb-3">
                                         <input class="form-control @error ('name') is-invalid @enderror" value="{{old('name')}}" id="inputName" type="text" name="name" placeholder="Enter your name" />
-                                        <label for="inputName">name</label>
+                                        <label for="inputName">Name</label>
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

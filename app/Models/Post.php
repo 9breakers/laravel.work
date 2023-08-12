@@ -14,7 +14,7 @@ class Post extends Model
 {
 
     use Sluggable;
-    protected $fillable= ['name', 'description', 'slug', 'price', 'image', 'quantity', 'category_id'];
+    protected $fillable= ['name', 'description', 'slug', 'price', 'image', 'quantity', 'category_id','views'];
 
     public function tags() :BelongsToMany
     {
@@ -47,7 +47,7 @@ class Post extends Model
 
             $imagePath = storage_path('app/public/') . '/' . $path;
             $image = Image::make($imagePath);
-            $image->resize(150,150, function ($img){
+            $image->resize(250,150, function ($img){
                 $img->aspectRatio();
                 $img->upsize();
             });
@@ -64,4 +64,10 @@ class Post extends Model
         return asset("public/storage/{$this->image}");
 
     }
+
+    public function incrementViews()
+    {
+        $this->increment('views');
+    }
+
 }

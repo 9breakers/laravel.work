@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('slug')->unique();
+            $table->unsignedInteger('views')->default(0);
             $table->unsignedInteger('price');
             $table->string('image');
             $table->integer('quantity');

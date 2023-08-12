@@ -24,6 +24,7 @@
                                     <th>Кількість</th>
                                     <th>Tag</th>
                                     <th>Категорія</th>
+                                    <th>Перегляди</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -34,10 +35,13 @@
                                         <td>{{ $post->name }}</td>
                                         <td>{{ $post->slug }}</td>
                                         <td>{{ $post->price }}</td>
-                                        <td>{{ $post->image }}</td>
+                                        <td><img src="{{$post->getImage() }}" alt="Зображення">
+                                        </td>
                                         <td>{{ $post->quantity }}</td>
                                         <td>{{ $post->tags->pluck('name')->join(',  ') }}</td>
                                         <td>{{ $post->category->name }}</td>
+                                        <td>{{ $post->views }}</td>
+
                                         <td>
                                             <a href="{{ route('post.edit', ['post' => $post->id]) }}" class="btn btn-info btn-sm float-left mr-1">
                                                 <i class="fas fa-pencil-alt"></i>

@@ -9,13 +9,13 @@ class HomeController extends Controller
 {
     public function index(){
 
-        $posts = Post::with('category')->orderBy('id', 'desc')->paginate(6);
+        $posts = Post::with('category')->orderBy('id', 'desc')->paginate(12);
    return view('main.home',compact('posts'));
     }
 
 
     public function popular(Post $posts){
-        $posts = Post::orderBy('views', 'desc')->paginate(10);
+        $posts = Post::orderBy('views', 'desc')->paginate(12);
 
         return view('main.popular', compact('posts'));
 

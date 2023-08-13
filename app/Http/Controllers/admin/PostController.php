@@ -11,12 +11,17 @@ use App\Models\Tag;
 
 class PostController extends Controller
 {
+    public function createPosts()
+    {
+        Post::factory()->count(100)->create();
+        return "100 постів створено.";
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $posts =Post::paginate(10);
+        $posts =Post::paginate(12);
         return view('admin.posts.index', compact('posts'));
     }
 

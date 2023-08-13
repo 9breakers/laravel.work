@@ -26,6 +26,7 @@ Route::middleware(['admin'])->group(function (){
     Route::resource('/tags', TagController::class);
     Route::resource('/category', CategoryController::class);
     Route::resource('/post', PostController::class);
+    Route::get('posts/createPosts', [PostController::class, 'createPosts'])->name('posts.createPosts');
 });
 
 Route::middleware(['guest'])->group(function (){
@@ -36,11 +37,13 @@ Route::middleware(['guest'])->group(function (){
     Route::post('/login', [LoginController::class, 'create']);
 
 });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
+});
 
-Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
+
 
 
 Route::get ('/' , [HomeController::class , 'index'])->name('home');
 Route::get('/popular',[HomeController::class, 'popular'])->name('popular');
 Route::get('/posts/{slug}',[HomeController::class, 'show'])->name('posts.show');
-

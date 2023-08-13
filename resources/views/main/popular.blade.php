@@ -18,6 +18,7 @@
                                     <!-- Product price-->
                                     {{$post->price}}$
                                     <h5>{{$post->category->name}}</h5>
+                                   Переглядів: <h5>{{$post->views}}</h5>
                                 </div>
                             </div>
                             <!-- Product actions-->

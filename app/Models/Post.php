@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -27,6 +28,10 @@ class Post extends Model
     {
 
         return $this->belongsTo(Category::class);
+    }
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class, 'post_id');
     }
 
     public function sluggable(): array

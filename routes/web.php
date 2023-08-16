@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\admin\TagController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\PostController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,17 @@ Route::middleware(['guest'])->group(function (){
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
+
+
+    Route::prefix('cart')->group(function () {
+        Route::post('/add', [CartController::class, 'addItem'])->name('cart.add');
+        Route::post('/remove/{id}', [CartController::class, 'CartRemove'])->name('cart.remove');
+        Route::get('/', [CartController::class, 'showCart'])->name('cart');
+        Route::get('/count', [CartController::class, 'getCartItemCount'])->name('cart.count');
+    });
+
+
+
 });
 
 

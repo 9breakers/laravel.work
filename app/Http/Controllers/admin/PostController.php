@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function createPosts()
     {
-        Post::factory()->count(100)->create();
+        Post::factory()->count(10)->create();
         return "100 постів створено.";
     }
     /**

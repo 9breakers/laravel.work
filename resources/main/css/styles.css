@@ -10824,3 +10824,40 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+     /* Стилі для кращого вигляду */
+ body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+ }
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0; /* Зменшений відступ зверху */
+}
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+select {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,14 +50,17 @@ class CartController extends Controller
 
     public function showCart(){
 
+
         $Carts = Cart::with('post')->where('user_id', auth()->id())->get();
+        $Categories= Category::all();
+        $Tags =Tag::all();
         $totalPrice = 0;
 
         foreach ($Carts as $cartItem) {
             $totalPrice += $cartItem->price * $cartItem->quantity;
         }
 
-        return view('main.cart', compact('Carts', 'totalPrice'));
+        return view('main.cart', compact('Carts', 'totalPrice','Categories', 'Tags'));
     }
 
     public function CartRemove($id)

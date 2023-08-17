@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Intervention\Image\Facades\Image;
 
 class HomeController extends Controller
@@ -10,14 +12,17 @@ class HomeController extends Controller
     public function index(){
 
         $posts = Post::with('category')->orderBy('id', 'desc')->paginate(12);
-   return view('main.home',compact('posts'));
+        $Categories= Category::all();
+        $Tags =Tag::all();
+   return view('main.home',compact('posts', 'Categories', 'Tags'));
     }
 
 
-    public function popular(Post $posts){
+    public function popular(){
         $posts = Post::orderBy('views', 'desc')->paginate(12);
-
-        return view('main.popular', compact('posts'));
+        $Categories= Category::all();
+        $Tags =Tag::all();
+        return view('main.popular', compact('posts','Categories', 'Tags'));
 
     }
 

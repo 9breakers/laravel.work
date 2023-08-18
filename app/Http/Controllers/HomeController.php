@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\PostFilter;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -9,20 +10,21 @@ use Intervention\Image\Facades\Image;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(PostFilter $request){
 
-        $posts = Post::with('category')->orderBy('id', 'desc')->paginate(12);
-        $Categories= Category::all();
+        $posts = Post::filter($request)->paginate(10);
+        $categories= Category::all();
         $Tags =Tag::all();
-   return view('main.home',compact('posts', 'Categories', 'Tags'));
+
+   return view('main.home',compact('posts', 'categories', 'Tags'));
     }
 
 
-    public function popular(){
+    public function popular(PostFilter $request){
         $posts = Post::orderBy('views', 'desc')->paginate(12);
-        $Categories= Category::all();
+        $categories= Category::all();
         $Tags =Tag::all();
-        return view('main.popular', compact('posts','Categories', 'Tags'));
+        return view('main.popular', compact('posts','categories', 'Tags'));
 
     }
 

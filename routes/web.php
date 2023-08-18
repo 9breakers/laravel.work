@@ -53,9 +53,6 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-
-
-
 Route::get ('/' , [HomeController::class , 'index'])->name('home');
 Route::get('/popular',[HomeController::class, 'popular'])->name('popular');
 Route::get('/posts/{slug}',[HomeController::class, 'show'])->name('posts.show');

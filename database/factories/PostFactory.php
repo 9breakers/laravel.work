@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'description' => $this->faker->paragraphs(3, true),
             'slug' => $this->faker->unique()->slug,
             'views' => $this->faker->numberBetween(0, 1000),
-            'price' => $this->faker->numberBetween(10, 100),
+            'price' => $this->faker->numberBetween(10, 100000),
             'image' => 'images/default.png',
             'quantity' => $this->faker->numberBetween(1, 100),
             'category_id' => function () {

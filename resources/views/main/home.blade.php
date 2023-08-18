@@ -1,4 +1,5 @@
 @extends('main.layouts.layouts')
+@include('main.layouts.header')
 
 @section('content')
     <section class="py-5">

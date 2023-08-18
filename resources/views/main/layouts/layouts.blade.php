@@ -21,7 +21,7 @@
 <!-- Navigation-->
 @include('main.layouts.navigation')
 <!-- Header-->
-@include('main.layouts.header')
+@yield('head')
 <!-- Section-->
 @yield('content')
 <!-- Footer-->

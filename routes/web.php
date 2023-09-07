@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\user\RegisterController;
@@ -37,10 +38,14 @@ Route::middleware(['guest'])->group(function (){
     Route::get('/login', [LoginController::class, 'show'])->name('login');
     Route::post('/login', [LoginController::class, 'create']);
 
+
+
+
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
 
+    Route::get('/pay',[StripeController::class, 'index'])->name('pay');
 
     Route::prefix('cart')->group(function () {
         Route::post('/add', [CartController::class, 'addItem'])->name('cart.add');

@@ -12,7 +12,9 @@ export default defineConfig({
                 'resources/admin/js/scripts.js',
 
                 'resources/main/css/styles.css',
-                'resources/main/js/scripts.js'
+                'resources/main/js/scripts.js',
+
+                'resources/cart/js/script.js'
 
 
             ],

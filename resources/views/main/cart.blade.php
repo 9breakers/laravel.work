@@ -49,7 +49,7 @@
                     @endforeach
                 </div>
                 <div class="text-center mt-4">
-                    <a href="" class="btn btn-primary">Придбати</a>
+                    <a href="{{route('pay')}}" class="btn btn-primary">Придбати</a>
                     <p>Загальна сума: {{$totalPrice}}$</p>
                 </div>
 

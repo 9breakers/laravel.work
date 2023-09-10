@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,24 +22,24 @@
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                             <div class="card-body">
-                                <form method="post" action="{{route('login')}}">
+                                <form method="post" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-floating mb-3">
-                                        <input class="form-control @error ('email') is-invalid @enderror" id="inputEmail" name="email" type="email" placeholder="name@example.com" />
+                                        <input class="form-control @error('email') is-invalid @enderror" id="inputEmail" name="email" type="email" placeholder="name@example.com" />
                                         <label for="inputEmail">Email address</label>
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control  @error ('password') is-invalid @enderror"" id="inputPassword" type="password" name="password" placeholder="Password" />
+                                        <input class="form-control  @error('password') is-invalid @enderror" id="inputPassword" type="password" name="password" placeholder="Password" />
                                         <label for="inputPassword">Password</label>
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                     <div class="form-check mb-3">
@@ -48,12 +47,21 @@
                                         <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-{{--                                        <a class="small" href="password.html">Forgot Password?</a>--}}
-                                        <button  class="btn btn-primary btn-block" type="submit">Login</button>
+                                        <a class="small" href="password.html">Forgot Password?</a>
+                                        <button class="btn btn-primary btn-block" type="submit">Login</button>
                                     </div>
+                                </form>
+
+                                <!-- Додайте цей код перед закриваючим </div> тегом перед </main> -->
+                                <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                    <a class="btn btn-danger btn-block" href="">
+                                        <i class="fab fa-google"></i> Login with Google
+                                    </a>
+                                </div>
                             </div>
+
                             <div class="card-footer text-center py-3">
-                                <div class="small"><a href="{{route('registration')}}">Need an account? Sign up!</a></div>
+                                <div class="small"><a href="{{ route('registration') }}">Need an account? Sign up!</a></div>
                             </div>
                         </div>
                     </div>
@@ -77,6 +85,5 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
 </body>
 </html>

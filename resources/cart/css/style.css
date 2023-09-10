@@ -319,3 +319,9 @@ Credit Card
 .the-most img {
     max-width: 100%;
 }
+.is-invalid {
+    border: 1px solid red;
+}
+.invalid-feedback {
+    color: red;
+}

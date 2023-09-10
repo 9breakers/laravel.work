@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\StripeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\user\RegisterController;
@@ -39,13 +41,19 @@ Route::middleware(['guest'])->group(function (){
     Route::post('/login', [LoginController::class, 'create']);
 
 
-
+    Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 
 });
-Route::middleware(['auth'])->group(function () {
-    Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
+Auth::routes(['verify'=>true]);
+Route::middleware(['verified' ,'auth'])->group(function () {
+
+
+
 
     Route::get('/pay',[StripeController::class, 'index'])->name('pay');
+    Route::post('/pay', [StripeController::class, 'charge']);
+
 
     Route::prefix('cart')->group(function () {
         Route::post('/add', [CartController::class, 'addItem'])->name('cart.add');
@@ -57,7 +65,14 @@ Route::middleware(['auth'])->group(function () {
 
 
 });
+Route::get('/logout',[LogoutController::class, 'logout'])->name('logout');
 
 Route::get ('/' , [HomeController::class , 'index'])->name('home');
 Route::get('/popular',[HomeController::class, 'popular'])->name('popular');
 Route::get('/posts/{slug}',[HomeController::class, 'show'])->name('posts.show');
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

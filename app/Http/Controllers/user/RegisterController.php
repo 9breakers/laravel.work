@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class RegisterController extends Controller
 {
     public function show(){
-        return view('user.registration');
+        return view('auth.registration');
     }
 
     public function create(RegisterRequest $request){
@@ -21,6 +21,7 @@ class RegisterController extends Controller
             'email'=>$request->email,
             'password'=>bcrypt($request->password),
         ]);
+
         Auth::login($users);
 
         return redirect('/');

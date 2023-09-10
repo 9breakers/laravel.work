@@ -65,19 +65,31 @@
             </div>
         </div>
     </div>
-    <form class="form" autocomplete="off" novalidate>
-        <fieldset>
-            <label for="card-number">Номер карти</label>
-            <input type="num" id="card-number" class="input-cart-number" maxlength="4" tabindex="1" />
-            <input type="num" id="card-number-1" class="input-cart-number" maxlength="4" tabindex="2" />
-            <input type="num" id="card-number-2" class="input-cart-number" maxlength="4" tabindex="3" />
-            <input type="num" id="card-number-3" class="input-cart-number" maxlength="4" tabindex="4" />
-        </fieldset>
+    <form method="post" class="form"  action="{{ route('pay') }}">
 
-        <fieldset>
-            <label for="card-holder">Власник картки</label>
-            <input type="text" id="card-holder" />
+        @csrf
+        <fieldset name="card-number">
+            <label for="card-number-1" class="">Номер карти</label>
+            <input type="text" id="card-number-1" class=" @error('card-number') is-invalid @enderror input-cart-number" maxlength="4" tabindex="1" />
+            <input type="text" id="card-number-2" class="@error('card-number') is-invalid @enderror input-cart-number" maxlength="4" tabindex="2" />
+            <input type="text" id="card-number-3" class="@error('card-number') is-invalid @enderror input-cart-number" maxlength="4" tabindex="3" />
+            <input type="text" id="card-number-4" class="@error('card-number') is-invalid @enderror input-cart-number" maxlength="4" tabindex="4" />
         </fieldset>
+        @error('card-number')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+
+        <fieldset name="card-holder" class="card">
+            <label class="card-holder">Власник картки</label>
+            <input type="text" class="card-holder @error('card-holder') is-invalid @enderror" id="card-holder"/>
+        </fieldset>
+        @error('card-holder')
+        <span class="invalid-feedback">{{ $message }}</span>
+        @enderror
+
+
+
+
         <fieldset class="fieldset-expiration">
             <label for="card-expiration-month">Закінчення терміну дії карти</label>
             <div class="select">
@@ -110,10 +122,11 @@
                 </select>
             </div>
         </fieldset>
-        <fieldset class="fieldset-ccv">
+        <fieldset class="fieldset-ccv" name="fieldset-ccv">
             <label for="card-ccv">CCV/CVV</label>
             <input type="text" id="card-ccv" maxlength="3" />
         </fieldset>
-        <button class="btn"><i class="fa fa-lock"></i> submit</button>
+        <div class="d-grid"><button class="btn btn-primary btn-block" type="submit">Оплата</button></div>
     </form>
 </div>
+

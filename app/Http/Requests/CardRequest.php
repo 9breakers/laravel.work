@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class CardRequest extends FormRequest
 {
     /**
      * Determine if the auth is authorized to make this request.
@@ -22,9 +22,18 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string|alpha_num|min:3|max:55',
-            'email'=>'required|string|email|max:55|unique:users',
-            'password' => 'required|min:8|confirmed:password_confirm',
+
+            'card-number' => [
+                'required',
+                'credit_card',
+            ],
+
+            'card-holder' => [
+                'required',
+                'string', // Введене значення має бути рядком
+                'max:255', // Максимальна довжина рядка
+            ],
+
         ];
     }
 }

@@ -54,7 +54,7 @@
 
                                 <!-- Додайте цей код перед закриваючим </div> тегом перед </main> -->
                                 <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                    <a class="btn btn-danger btn-block" href="">
+                                    <a class="btn btn-danger btn-block" href="{{'googleauth'}}">
                                         <i class="fab fa-google"></i> Login with Google
                                     </a>
                                 </div>

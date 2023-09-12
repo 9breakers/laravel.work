@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\TagController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\CartController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,9 @@ Route::middleware(['guest'])->group(function (){
     Route::get('/login', [LoginController::class, 'show'])->name('login');
     Route::post('/login', [LoginController::class, 'create']);
 
+
+    Route::get('googleauth', [LoginController::class,'redirectGoogle'])->name('googleauth');
+    Route::get('googleauth/callback', [LoginController::class,'callbackGoogle']);
 
     Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
@@ -73,6 +77,5 @@ Route::get('/posts/{slug}',[HomeController::class, 'show'])->name('posts.show');
 
 
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

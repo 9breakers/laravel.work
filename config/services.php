@@ -35,5 +35,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'google' => [
+        'client_id' => env('Google_CLIENT_ID'),
+        'client_secret' => env('Google_CLIENT_SECRET'),
+        'redirect' => 'http://laravel.work/googleauth/callback',
+    ],
 
 ];

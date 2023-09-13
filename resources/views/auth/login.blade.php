@@ -47,12 +47,10 @@
                                         <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="password.html">Forgot Password?</a>
+                                        <a class="small" href="{{route('password.request')}}">Forgot Password?</a>
                                         <button class="btn btn-primary btn-block" type="submit">Login</button>
                                     </div>
                                 </form>
-
-                                <!-- Додайте цей код перед закриваючим </div> тегом перед </main> -->
                                 <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                     <a class="btn btn-danger btn-block" href="{{'googleauth'}}">
                                         <i class="fab fa-google"></i> Login with Google

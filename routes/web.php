@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +36,7 @@ Route::middleware(['admin'])->group(function (){
     Route::get('posts/createPosts', [PostController::class, 'createPosts'])->name('posts.createPosts');
 });
 
+
 Route::middleware(['guest'])->group(function (){
     Route::get('/registration', [RegisterController::class , 'show'])->name('registration');
     Route::post('/registration', [RegisterController::class, 'create']);
@@ -48,9 +51,20 @@ Route::middleware(['guest'])->group(function (){
     Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 
+    Route::get('/reset-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/reset-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+
+
+
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
 });
+
 Auth::routes(['verify'=>true]);
 Route::middleware(['verified' ,'auth'])->group(function () {
+
 
 
 

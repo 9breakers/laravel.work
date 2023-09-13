@@ -6,6 +6,7 @@
 
         <label for="categories">За категоріями:</label>
         <select id="categories" name="category_id">
+            <option></option>
             @foreach($categories as $cat)
                 <option value="{{$cat->id}}">{{$cat->name}}</option>
             @endforeach

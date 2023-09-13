@@ -52,7 +52,7 @@
 <!-- Footer-->
 <div class="wrapper">
     <div class="content">
-        <!-- Ваш контент тут -->
+
     </div>
     <footer>
         <p class="m-0 text-center text-white">  Copyright &copy; Your Website 2023</p>

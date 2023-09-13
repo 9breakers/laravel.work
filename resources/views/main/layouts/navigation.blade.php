@@ -10,7 +10,7 @@
                         <li><a class="dropdown-item" href="/">All Products</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="{{route('popular')}}">Popular Items</a></li>
-                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                        <li><a class="dropdown-item" href="">New Arrivals</a></li>
                     </ul>
                 </li>
 

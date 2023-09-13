@@ -10875,9 +10875,12 @@ html, body {
     flex: 1;
 }
 
-footer {
-    background-color: #333;
-    color: black;
-    text-align: center;
-    padding: 55px;
+
+.body {
+    max-width: 80%; /* Зменшити максимальну ширину сторінки на 80% від ширини вікна браузера */
+    margin: 0 auto; /* Вирівняти сторінку по центру горизонталі */
+}
+
+.form-group.row {
+    margin-bottom: 15px; /* Додати відступ між рядками мітка-поле введення */
 }

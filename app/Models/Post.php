@@ -36,6 +36,12 @@ class Post extends Model
         return $this->hasMany(Cart::class, 'post_id');
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+
+
     public function sluggable(): array
     {
         return [

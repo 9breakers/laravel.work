@@ -33,56 +33,46 @@
             </article>
 
             <!-- Comments section-->
-            <section class="mb-5">
-                <div class="card bg-light">
-                    <div class="card-body">
-                        <!-- Comment form-->
-                        <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                        <!-- Comment with nested comments-->
-                        <div class="d-flex mb-4">
-                            <!-- Parent comment-->
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                <!-- Child comment 1-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                    </div>
-                                </div>
-                                <!-- Child comment 2-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        When you put money directly to a problem, it makes a good headline.
-                                    </div>
+        <section class="mb-5">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <form class="mb-4" method="post" action="{{ route('store') }}">
+                        @csrf
+                        <input type="hidden" name="post_id" value="{{ $post->id }}">
+                        <textarea class="form-control" name="text" rows="3" placeholder="Приєднуйтесь до обговорення та залиште коментар!"></textarea>
+                        <button type="submit" class="btn btn-primary mt-3">Залишити коментар</button>
+                    </form>
+
+                    @foreach($comments as $com)
+                        <div class="d-flex justify-content-between mb-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                <div class="ms-3">
+                                    <div class="fw-bold">{{$com->user->name}}</div>
+                                    <!-- Поле дати зліва від імені -->
+                                    <div class="text-muted fst-italic mb-2">{{$com->created_at->format('d.m.Y H:i')}}</div>
+                                    {{$com->text}}
                                 </div>
                             </div>
+                            @if(Auth::user() && $com->user_id == Auth::user()->id)
+                                <form method="post" action="{{ route('comments.destroy', ['comment' => $com->id]) }}">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger">Видалити</button>
+                                </form>
+                            @endif
                         </div>
-                        <!-- Single comment-->
-                        <div class="d-flex">
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                            </div>
-                        </div>
-                    </div>
+
+                    @endforeach
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+    </div>
         <!-- Side widgets-->
-        <div class="col-lg-4">
-        </div>
+
     </div>
 </div>
-<!-- Footer-->
 
-<!-- Bootstrap core JS-->
 
 </body>
 </html>

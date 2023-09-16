@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Filters\PostFilter;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use Intervention\Image\Facades\Image;
@@ -31,6 +32,7 @@ class HomeController extends Controller
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
+        $comments = Comment::where('post_id', $post->id)->orderBy('created_at', 'desc')->get();
         $imagePath = public_path("storage/{$post->image}");
 
 
@@ -44,7 +46,7 @@ class HomeController extends Controller
 
 
         $post->incrementViews(); // Збільшуємо кількість переглядів
-        return view('main.show', compact('post', 'image'));
+        return view('main.show', compact('post', 'image','comments'));
     }
 
 

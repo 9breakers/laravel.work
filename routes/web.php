@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -79,6 +80,10 @@ Route::middleware(['verified' ,'auth'])->group(function () {
         Route::get('/', [CartController::class, 'showCart'])->name('cart');
         Route::get('/count', [CartController::class, 'getCartItemCount'])->name('cart.count');
     });
+
+    Route::post('comments', [CommentController::class, 'store'])->name('store');
+    Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
 
 
 

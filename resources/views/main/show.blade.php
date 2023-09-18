@@ -46,7 +46,9 @@
                     @foreach($comments as $com)
                         <div class="d-flex justify-content-between mb-4">
                             <div class="d-flex">
-                                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                <div class="flex-shrink-0">
+                                    <img class="rounded-circle" src="{{ asset('public/storage/avatar-' . $com->user_id . '.png') }}" width="40" alt="..." />
+                                </div>
                                 <div class="ms-3">
                                     <div class="fw-bold">{{$com->user->name}}</div>
                                     <!-- Поле дати зліва від імені -->

@@ -8,8 +8,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Laravolt\Avatar\Avatar;
 
 class RegisterController extends Controller
 {
@@ -55,6 +54,8 @@ class RegisterController extends Controller
             'email'=>$request->email,
             'password'=>bcrypt($request->password),
         ]);
+
+        (new Avatar)->create($request->name)->save(storage_path('app/public/avatar-' . $users->id. '.png'));
 
         Auth::login($users);
 

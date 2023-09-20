@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
+use Laravolt\Avatar\Avatar;
 
 class LoginController extends Controller
 {
@@ -95,6 +96,7 @@ class LoginController extends Controller
                 'password'=>bcrypt(Str::random(10))
             ]);
         }
+        (new Avatar)->create($data->name)->save(storage_path('app/public/avatar-' . $user->id. '.png'));
         Auth::login($user);
         return $user;
     }

@@ -43,6 +43,7 @@
                         <button type="submit" class="btn btn-primary mt-3">Залишити коментар</button>
                     </form>
 
+                    @if(count($comments) > 0)
                     @foreach($comments as $com)
                         <div class="d-flex justify-content-between mb-4">
                             <div class="d-flex">
@@ -64,8 +65,10 @@
                                 </form>
                             @endif
                         </div>
-
                     @endforeach
+                    @else
+                        <div class="alert alert-info">Коментарів немає</div>
+                    @endif
                 </div>
             </div>
         </section>

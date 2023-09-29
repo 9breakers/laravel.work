@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PurchaseConfirmationMail;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderConfirmationMail;
 use Stripe\Stripe;
 
 
@@ -11,7 +14,7 @@ class StripeController extends Controller
 {
     public function session(Request $request)
     {
-//        $user         = auth()->user();
+        $user = auth()->user();
         $productItems = [];
 
         Stripe::setApiKey(config('stripe.sk'));
@@ -54,6 +57,26 @@ class StripeController extends Controller
 
     public function success()
     {
+        // Отримайте інформацію про куплений товар з сесії або з бази даних.
+        $purchasedItems = session('cart'); // Або використайте модель для отримання товарів з бази даних.
+
+        // Обчисліть загальну суму покупки
+        $totalAmount = 0;
+        foreach ($purchasedItems as $item) {
+            $totalAmount += $item['price'] * $item['quantity'];
+        }
+
+        // Отримайте ім'я користувача та електронну адресу користувача.
+        $user = auth()->user();
+        $userName = $user->name;
+        $userEmail = $user->email;
+
+        // Створіть логіку для створення і відправлення листа з інформацією про куплені товари на електронну пошту користувача.
+        // Використовуйте Laravel Mail для надсилання листа.
+
+        // Приклад:
+        Mail::to($userEmail)->send(new PurchaseConfirmationMail($userName, $purchasedItems, $totalAmount));
+
         return view('main.paySuccess');
     }
 

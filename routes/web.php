@@ -67,6 +67,15 @@ Auth::routes(['verify'=>true]);
 Route::middleware(['verified' ,'auth'])->group(function () {
 
 
+    Route::post('/session', [StripeController::class, 'session'])->name('session');
+    Route::get('/success', [StripeController::class, 'success'])->name('success');
+    Route::get('/cancel', [StripeController::class, 'cancel'])->name('cancel');
+
+
+    Route::get('cart', [CartController::class, 'cart'])->name('cart');
+    Route::get('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add_to_cart');
+    Route::patch('update-cart', [CartController::class, 'update'])->name('update_cart');
+    Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove_from_cart');
 
 
 
@@ -74,12 +83,6 @@ Route::middleware(['verified' ,'auth'])->group(function () {
     Route::post('/pay', [StripeController::class, 'charge']);
 
 
-    Route::prefix('cart')->group(function () {
-        Route::post('/add', [CartController::class, 'addItem'])->name('cart.add');
-        Route::post('/remove/{id}', [CartController::class, 'CartRemove'])->name('cart.remove');
-        Route::get('/', [CartController::class, 'showCart'])->name('cart');
-        Route::get('/count', [CartController::class, 'getCartItemCount'])->name('cart.count');
-    });
 
     Route::post('comments', [CommentController::class, 'store'])->name('store');
     Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');

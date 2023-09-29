@@ -29,11 +29,8 @@
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
                                     <!-- resources/views/product.blade.php -->
-                                    <form action="{{ route('cart.add') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="post_id" value="{{ $post->id }}">
-                                        <button class="btn btn-primary" type="submit"> Додати в кошик</button>
-                                    </form>
+                                    <p class="btn-holder"><a href="{{ route('add_to_cart', $post->id) }}"
+                                                             class="btn btn-primary btn-block text-center" role="button">Add to cart</a> </p>
 
 
                                 </div>

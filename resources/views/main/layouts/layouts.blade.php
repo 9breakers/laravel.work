@@ -14,7 +14,9 @@
 
     @vite([
     'resources/main/css/styles.css',
-    'resources/main/js/scripts.js'])
+    'resources/main/js/scripts.js'
+
+    ])
 
 </head>
 <body>

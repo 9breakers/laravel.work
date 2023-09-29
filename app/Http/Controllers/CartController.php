@@ -2,81 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
-use App\Models\Category;
 use App\Models\Post;
-use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 class CartController extends Controller
 {
 
-    public function addItem(Request $request)
+    public function Cart(){
+
+
+        return view('main.cart');
+    }
+    public function addToCart($id)
     {
-        if (!Auth::check()) {
-            return redirect()->back()->with('error', 'Спочатку увійдіть в систему');
+        $Post = Post::findOrFail($id);
+
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        }  else {
+            $cart[$id] = [
+                "name" => $Post->name,
+                "photo" => $Post->getImage(),
+                "price" => $Post->price,
+                "quantity" => 1
+            ];
         }
 
-        $post_id = $request->input('post_id');
-        $quantity = 1;
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product add to cart successfully!');
+    }
 
-        $post = Post::find($post_id);
+    public function update(Request $request)
+    {
+        if($request->id && $request->quantity){
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cart successfully updated!');
+        }
+    }
 
-        if ($post) {
-            $existingCartItem = Cart::where('user_id', auth()->id())->where('post_id', $post_id)->first();
-
-            if ($existingCartItem) {
-                // Товар вже існує у кошику, збільшуємо кількість
-                $existingCartItem->update([
-                    'quantity' => $existingCartItem->quantity + $quantity,
-                ]);
-            } else {
-                // Додаємо новий товар до кошика
-                Cart::create([
-                    'post_id' => $post_id,
-                    'quantity' => $quantity,
-                    'price' => $post->price,
-                    'user_id' => Auth::user()->id,
-                ]);
+    public function remove(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
             }
-
-            return redirect()->back()->with('success', 'Товар додано до кошика');
-        } else {
-            return redirect()->back()->with('error', 'Продукт не знайдено');
+            session()->flash('success', 'Product successfully removed!');
         }
     }
 
-
-    public function showCart(){
-
-
-        $Carts = Cart::with('post')->where('user_id', auth()->id())->get();
-        $Categories= Category::all();
-        $Tags =Tag::all();
-        $totalPrice = 0;
-
-        foreach ($Carts as $cartItem) {
-            $totalPrice += $cartItem->price * $cartItem->quantity;
-        }
-
-        return view('main.cart', compact('Carts', 'totalPrice','Categories', 'Tags'));
-    }
-
-    public function CartRemove($id)
-    {
-        $cartItem = Cart::find($id);
-
-        if (!$cartItem) {
-            return redirect()->back();
-        }
-        $cartItem->delete();
-        return redirect()->route('cart');
-    }
-
-    public function getCartItemCount()
-    {
-        return Cart::where('user_id', auth()->id())->sum('quantity');
-    }
 
 }

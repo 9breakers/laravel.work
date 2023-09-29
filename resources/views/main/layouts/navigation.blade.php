@@ -35,13 +35,12 @@
                     </li>
                 </ul>
             @else
-                <form class="d-flex" action="{{ route('cart') }}" method="GET">
-                    <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">{{ app('App\Http\Controllers\CartController')->getCartItemCount() }}</span>
-                    </button>
-                </form>
+                <div class="btn-group">
+                        <a href="{{ route('cart') }}" class="btn btn-primary btn-block">Cart
+                            <span class="badge bg-danger">{{ count((array) session('cart')) }}</span>
+                        </a>
+
+                </div>
 
             @endguest
         </div>
